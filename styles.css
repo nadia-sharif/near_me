@@ -1,0 +1,240 @@
+/* ==========================================================================
+   1. Core Layout & Base Rules
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden; /* Prevents double scroll bars on mobile */
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar Panel Container */
+.map-overlay {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    background: #FFFFFF;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    color: #4B5563; /* Uniform base text color */
+    width: 340px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   2. Standardized Typography
+   ========================================================================== */
+/* Main Headings */
+.map-overlay h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827; /* Deep Dark */
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+}
+
+/* Standard UI Text & Body Content */
+.description-section p,
+.control-select,
+.legend-title,
+details p {
+    font-size: 13px;
+    color: #4B5563; /* Medium Slate */
+    line-height: 1.5;
+}
+
+/* Small UI Text: Labels, Badges, Metrics, and Footers */
+.location-tag,
+.score-title,
+.panel-section-title,
+.score-max-value,
+#dash-total,
+summary,
+.filter-section label,
+.legend-counter,
+.datasource {
+    font-size: 11px;
+    color: #9CA3AF; /* Light Gray Muted */
+}
+
+/* ==========================================================================
+   3. Component Architecture
+   ========================================================================== */
+/* Structural Dividers */
+.description-section,
+.summary,
+#category-panel,
+footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #E5E7EB;
+}
+.description-section {
+    margin-top: 0;
+    border-top: none;
+    border-bottom: 1px solid #E5E7EB;
+    padding-bottom: 16px;
+}
+
+/* Accent Containers (Instructions & Accordions Summary) */
+.description-section p.instruction,
+summary {
+    font-weight: 500;
+    color: #1F2937;
+    background: #F3F4F6;
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+/* Dynamic Metrics Block */
+#score-block {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 16px;
+}
+.score-title, .panel-section-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+.score-flex-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+#score-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: #4B5563;
+    line-height: 1;
+}
+#dash-total {
+    margin-left: auto;
+    background: #E5E7EB;
+    color: #4B5563;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* Info Dropdowns (<details> / <summary>) */
+details {
+    margin-top: 8px;
+}
+summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before {
+    content: "▶";
+    font-size: 11px;
+    color: #9CA3AF;
+    transition: transform 0.2s ease;
+}
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+details p {
+    padding: 8px 12px 0 12px;
+    margin: 0;
+}
+details p + p {
+    padding-top: 8px;
+}
+
+/* Form Selection Elements */
+.filter-section label {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.control-select {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.control-select:focus {
+    border-color: #3887be;
+}
+
+/* Map Legends */
+.legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.legend-item {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.legend-text-stack {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+  
+}
+
+/* Utilities */
+.location-tag {
+    font-weight: 600;
+    color: #3887be; /* Primary brand blue accent */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   4. Mobile Responsive Breakpoint
+   ========================================================================== */
+@media (max-width: 768px) {
+    .map-overlay {
+        left: 0;
+        top: auto;
+        bottom: 0;
+        width: 100%;
+        max-height: 45vh;
+        border-radius: 16px 16px 0 0;
+        border: none;
+        padding: 20px;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+    }
+    .description-section p.instruction {
+        font-size: 12px;
+    }
+}
