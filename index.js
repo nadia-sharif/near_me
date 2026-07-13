@@ -401,7 +401,7 @@ map.on('click', (e) => {
             });
     
     */
-
+    // Thos code extracts data from the MapBox POI Layer
     // 1. Fetch your Isochrone travel boundary polygons as usual
     fetch(mapboxUrl)
         .then(response => response.json())
